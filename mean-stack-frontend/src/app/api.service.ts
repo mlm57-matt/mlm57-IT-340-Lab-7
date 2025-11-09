@@ -1,8 +1,20 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class Api {
-  
+export class ApiService {
+  private baseUrl = 'http://localhost:3000'; 
+
+  constructor(private http: HttpClient) {}
+
+  getItems(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/`);
+  }
+
+  addItem(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/`, data);
+  }
 }

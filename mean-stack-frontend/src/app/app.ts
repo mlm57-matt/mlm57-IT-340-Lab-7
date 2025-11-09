@@ -1,12 +1,17 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import router from './app.routes';
+import './db'; 
 
-@Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
-})
-export class App {
-  protected readonly title = signal('mean-stack-frontend');
-}
+const app = express();
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use('/', router);
+
+import { config } from './app.config';
+
+app.listen(config.port, () => {
+  console.log(`Server running on http://localhost:${config.port}`);
+});
