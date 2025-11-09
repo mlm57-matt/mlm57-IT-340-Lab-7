@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ItemsComponent } from './items.component';
-
-const routes: Routes = [
-  { path: '', component: ItemsComponent }
-];
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
-    AppComponent,
-    ItemsComponent
+    HttpClientModule,
+    AppComponent,  
+    ItemsComponent,
   ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

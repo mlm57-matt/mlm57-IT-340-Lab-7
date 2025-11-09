@@ -2,19 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Item {
+  _id?: string;
+  name: string;
+  description?: string;
+  price: number;
+}
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:3000'; 
+  private API_URL = 'http://localhost:3000/api'; 
 
   constructor(private http: HttpClient) {}
 
-  getItems(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/`);
+  getItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.API_URL}/items`);
   }
 
-  addItem(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/`, data);
+  addItem(item: Item): Observable<Item> {
+    return this.http.post<Item>(`${this.API_URL}/items`, item);
   }
 }
